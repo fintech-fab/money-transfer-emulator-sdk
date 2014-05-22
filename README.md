@@ -18,56 +18,58 @@ SDK for Money Transfer Emulator (https://github.com/fintech-fab/money-transfer-e
 
 # Simple usage
 
-	use FintechFab\MoneyTransferEmulatorSdk\Gateway;
+```PHP
+use FintechFab\MoneyTransferEmulatorSdk\Gateway;
 
-	$config = array(
-		'terminalId'    => 'your-terminal-id',
-		'secretKey'     => 'your-terminal-secret-key',
-		'gatewayUrl'    => 'url-to-gateway',
-		'currency'      => 'RUB',
-		'strongSSL'     => false,
-	);
+$config = array(
+	'terminalId'    => 'your-terminal-id',
+	'secretKey'     => 'your-terminal-secret-key',
+	'gatewayUrl'    => 'url-to-gateway',
+	'currency'      => 'RUB',
+	'strongSSL'     => false,
+);
 
-	// city list
+// city list
 
-	$gatewayCity = Gateway::newInstance($config);
-	$cityList = $gatewayCity->getCityList();
+$gatewayCity = Gateway::newInstance($config);
+$cityList = $gatewayCity->getCityList();
 
-	// fee amount for target city
+// fee amount for target city
 
-	$gatewayFee = Gateway::newInstance($config);
-	$feeAmount = $gatewayFee->getFeeValue($cityList[0]->id, 10.00);
+$gatewayFee = Gateway::newInstance($config);
+$feeAmount = $gatewayFee->getFeeValue($cityList[0]->id, 10.00);
 
-	// Start with payment 'check' and 'pay'
+// Start with payment 'check' and 'pay'
 
-	$gatewayPay = Gateway::newInstance($config);
+$gatewayPay = Gateway::newInstance($config);
 
-	$params = array(
-		'cityId'      => $cityList[0]->id,
-		'toName'      => 'Happy Man',
-		'orderAmount' => '10.00',
-		'toNumber'    => '791032123123',
-		'fromNumber'  => '3806865456467',
-	);
+$params = array(
+	'cityId'      => $cityList[0]->id,
+	'toName'      => 'Happy Man',
+	'orderAmount' => '10.00',
+	'toNumber'    => '791032123123',
+	'fromNumber'  => '3806865456467',
+);
 
-	$resultCheck = $gatewayPay->check($params);
+$resultCheck = $gatewayPay->check($params);
 
-	if($resultCheck){
+if($resultCheck){
 
-		$resultPay = $gatewayPay->pay($params);
+	$resultPay = $gatewayPay->pay($params);
 
-		if($resultPay){
+	if($resultPay){
 
-			// get status
+		// get status
 
-			$gatewayStatus = Gateway::newInstance($config);
-			$gatewayStatus->status($gatewayPay->getResultCode(), $params['toNumber']);
+		$gatewayStatus = Gateway::newInstance($config);
+		$gatewayStatus->status($gatewayPay->getResultCode(), $params['toNumber']);
 
-			// do cancel
+		// do cancel
 
-			$gatewayCancel = Gateway::newInstance($config);
-			$gatewayCancel->cancel($gatewayPay->getResultCode(), $params['toNumber']);
-
-		}
+		$gatewayCancel = Gateway::newInstance($config);
+		$gatewayCancel->cancel($gatewayPay->getResultCode(), $params['toNumber']);
 
 	}
+
+}
+```
