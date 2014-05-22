@@ -1,0 +1,32 @@
+{
+	"name": "fintech-fab/money-transfer-emulator-sdk",
+	"type": "library",
+	"description": "PHP SDK for Money Transfer Emulator Gateway",
+	"keywords": ["payments", "finance", "e-commerce", "sdk"],
+	"homepage": "http://fintech-fab.ru/",
+	"license": "MIT",
+	"version": "0.1",
+	"authors": [
+		{
+			"name": "Mikhail Novikov",
+			"email": "mikhail.e.novikov@gmail.com"
+		},
+		{
+			"name": "Vladimir Yuldashev",
+			"email": "misterio92@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": ">=3.7"
+	},
+	"autoload": {
+		"psr-0": {
+			"FintechFab\\MoneyTransferEmulatorSdk\\": "src/",
+			"FintechFab\\MoneyTransferEmulatorSdk\\Test\\": "src/tests/"
+		}
+	},
+	"minimum-stability": "dev"
+}
